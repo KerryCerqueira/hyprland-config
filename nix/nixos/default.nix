@@ -27,10 +27,25 @@ in
 		dconf.enable = true;
 	};
 	security.pam.services.hyprlock.fprintAuth = false;
+	powerManagement.enable = true;
 	services = {
 		blueman.enable = true;
 		xserver.excludePackages = [ pkgs.xterm ];
 		upower.enable = true;
+		thermald.enable = true;
+		auto-cpufreq = {
+			enable = true;
+			settings = {
+				battery = {
+					governor = "powersave";
+					turbo = "never";
+				};
+				charger = {
+					governor = "performance";
+					turbo = "auto";
+				};
+			};
+		};
 	};
 	environment.systemPackages = with pkgs; [
 		kitty
