@@ -1,4 +1,4 @@
-{ pkgs, hyprland, catppuccin, ... }:
+{ hyprland, catppuccin, ... }: { pkgs, ... }:
 let
 	system = pkgs.stdenv.hostPlatform.system;
 in

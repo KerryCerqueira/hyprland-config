@@ -1,4 +1,4 @@
-{ pkgs, self, ... }:
+{ self, ... }: { pkgs, ... }:
 let
 	dotfilesPath = builtins.path { path = "${self}/src"; name = "src"; };
 in {
@@ -12,7 +12,7 @@ in {
 		];
 	};
 	xdg.configFile."rofi/conf.d" = {
-		source = dotfilesPath + /rofi;
+		source = dotfilesPath + "/rofi";
 		recursive = true;
 	};
 }

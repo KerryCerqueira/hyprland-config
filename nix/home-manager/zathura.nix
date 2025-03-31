@@ -1,4 +1,4 @@
-{ self, ... }:
+{ self, ... }: { pkgs, ... }:
 
 let
 	dotfilesPath = builtins.path { path = "${self}/src"; name = "src"; };
@@ -7,6 +7,6 @@ in {
 		enable = true;
 		extraConfig = "include theme";
 	};
-	xdg.configFile."zathura/theme".source = dotfilesPath + /zathura/theme;
+	xdg.configFile."zathura/theme".source = dotfilesPath + "/zathura/theme";
 }
 

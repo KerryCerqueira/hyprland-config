@@ -1,9 +1,9 @@
-{ pkgs, self, ... }:
+{ self, ... }: { pkgs, ... }:
 
 let
 	dotfilesPath = builtins.path { path = "${self}/src"; name = "src"; };
 	swayncConfig = (
-		builtins.fromJSON (builtins.readFile dotfilesPath + /swaync/config.json)
+		builtins.fromJSON (builtins.readFile (dotfilesPath + "/swaync/config.json"))
 		// {"$schema" = "${pkgs.swaynotificationcenter}/etc/xdg/swaync/configSchema.json";}
 	);
 in {

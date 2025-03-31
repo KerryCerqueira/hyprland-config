@@ -1,4 +1,4 @@
-inputs: { pkgs, self, hyprland, catppuccin, ... }:
+{ self, hyprland, catppuccin, ... }@inputs: { pkgs, ... }:
 
 let
 	system = pkgs.stdenv.hostPlatform.system;
@@ -12,10 +12,10 @@ in
 		wdisplays
 	];
 	imports = [
-		./dolphin.nix
-		./rofi.nix
-		./swaync.nix
-		./zathura.nix
+		(import ./dolphin.nix inputs)
+		(import ./rofi.nix inputs)
+		(import ./swaync.nix inputs)
+		(import ./zathura.nix inputs)
 		catppuccin.homeManagerModules.catppuccin
 	];
 	catppuccin = {
@@ -39,23 +39,23 @@ in
 		cursorTheme.name = "Catppuccin-Mocha-Dark-Cursors";
 	};
 	xdg.configFile = {
-		"qt5ct/qt5ct.conf".source = dotfilesPath + /qt5ct/qt5ct.conf;
+		"qt5ct/qt5ct.conf".source = dotfilesPath + "/qt5ct/qt5ct.conf";
 		"kdeglobals".text = #toml
 		''
 		[General]
 			TerminalApplication=kitty
 		'';
 		"waybar/" = {
-			source = dotfilesPath + /waybar;
+			source = dotfilesPath + "/waybar";
 			recursive = true;
 		};
 		"hypr/config.d" = {
-			source = dotfilesPath + /hypr/config.d;
+			source = dotfilesPath + "/hypr/config.d";
 			recursive = true;
 		};
-		"hypr/hyprpaper.conf".source = dotfilesPath + /hypr/hyprpaper.conf;
-		"hypr/hyprlock.conf".source = dotfilesPath + /hypr/hyprlock.conf;
-		"hypr/hypridle.conf".source = dotfilesPath + /hypr/hypridle.conf;
+		"hypr/hyprpaper.conf".source = dotfilesPath + "/hypr/hyprpaper.conf";
+		"hypr/hyprlock.conf".source = dotfilesPath + "/hypr/hyprlock.conf";
+		"hypr/hypridle.conf".source = dotfilesPath + "/hypr/hypridle.conf";
 	};
 	wayland.windowManager.hyprland = {
 		enable = true;
