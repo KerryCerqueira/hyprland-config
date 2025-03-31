@@ -1,0 +1,203 @@
+[
+	{
+		"backlight/slider": {
+			"min": 5,
+			"max": 100,
+			"orientation": "horizontal",
+			"device": "intel_backlight"
+		},
+		"backlight": {
+			"device": "intel_backlight",
+			"format": "{icon} {percent}%",
+			"format-icons": [
+				"󰃝",
+				"󰃞",
+				"󰃟",
+				"󰃠"
+			],
+		},
+		"battery": {
+			"format": "{icon} {capacity}%",
+			"format-charging": "󰂄 {capacity}%",
+			"format-full": "{icon} {capacity}%",
+			"format-icons": [
+				"󰁺",
+				"󰁻",
+				"󰁼",
+				"󰁽",
+				"󰁾",
+				"󰁿",
+				"󰂀",
+				"󰂁",
+				"󰂂",
+				"󰁹"
+			],
+			"interval": 10,
+			"states": {
+				"critical": 10,
+				"warning": 20
+			},
+			"tooltip": true,
+			"on-click": "auto-cpufreq-gtk"
+		},
+		"group/power": {
+			"orientation": "inherit",
+			"drawer": {
+				"transition-duration": 500,
+				"transition-left-to-right": true,
+			},
+			"modules": [
+				"custom/power",
+				"custom/quit",
+				"custom/lock",
+				"custom/reboot",
+			]
+		},
+		"custom/quit": {
+			"format": "󰗼",
+			"tooltip": false,
+			"on-click": "hyprctl dispatch exit"
+		},
+		"custom/lock": {
+			"format": "󰍁",
+			"tooltip": false,
+			"on-click": "hyprlock"
+		},
+		"custom/reboot": {
+			"format": "󰜉",
+			"tooltip": false,
+			"on-click": "zenity --question --title='' --text='Reboot system?' && reboot",
+		},
+		"custom/power": {
+			"format": " ",
+			"tooltip": false,
+			"on-click": "zenity --question --title='' --text='Poweroff system?' && systemctl poweroff",
+		},
+		"custom/notification": {
+			"tooltip": false,
+			"format": "{} {icon}",
+			"format-icons": {
+				"notification": "󱅫",
+				"none": "",
+				"dnd-notification": " ",
+				"dnd-none": "󰂛",
+				"inhibited-notification": " ",
+				"inhibited-none": "",
+				"dnd-inhibited-notification": " ",
+				"dnd-inhibited-none": " ",
+			},
+			"return-type": "json",
+			"exec-if": "which swaync-client",
+			"exec": "swaync-client -swb",
+			"on-click": "sleep 0.1 && swaync-client -t -sw",
+			"on-click-right": "sleep 0.1 && swaync-client -d -sw",
+			"escape": true,
+		},
+		"clock": {
+			"format": "{:%H:%M}  ",
+			"format-alt": "{:%A, %B %d, %Y (%R)}  ",
+			"tooltip-format": "<tt><small>{calendar}</small></tt>",
+			"calendar": {
+				"mode"          : "year",
+				"mode-mon-col"  : 3,
+				"weeks-pos"     : "right",
+				"on-scroll"     : 1,
+				"on-click-right": "mode",
+				"format": {
+					"months":     "<span color='#ffead3'><b>{}</b></span>",
+					"days":       "<span color='#ecc6d9'><b>{}</b></span>",
+					"weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+					"weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+					"today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+				}
+			},
+			"actions": {
+				"on-click-right": "mode",
+				"on-click-forward": "tz_up",
+				"on-click-backward": "tz_down",
+				"on-scroll-up": "shift_up",
+				"on-scroll-down": "shift_down"
+			}
+		},
+		"cpu": {
+			"format": "󰻠 {usage}%",
+			"interval": 1,
+			"on-click": "rofi -config ~/.config/rofi/conf.d/config.rasi -show top",
+		},
+		"custom/launcher": {
+			"format": " ",
+			"on-click": "nwg-drawer",
+			"tooltip": false
+		},
+		"custom/keyboard": {
+			"format": "󰌏 ",
+			"on-click": "kill -34 $(pidof wvkbd-mobintl)",
+			"tooltip": false
+		},
+		"hyprland/workspaces": {
+			// "format": "{icon}:{windows}",
+			// "on-click": "activate"
+			// "format": "{icon}",
+			// "window-rewrite-default": "",
+			"all-outputs": true,
+			"move-to-monitor": true,
+			"show-special": true,
+			"special-visible-only": true,
+		},
+		"idle_inhibitor": {
+			"format": "{icon}",
+			"format-icons": {
+				"activated": " ",
+				"deactivated": " "
+			},
+			"tooltip": true,
+		},
+		"layer": "top",
+		"memory": {
+			"format": "󰍛 {percentage}%",
+			"interval": 1,
+			"states": {
+				"warning": 85
+			}
+		},
+		"wlr/taskbar": {
+			"format": "{icon} {name}",
+			"icon-size": 14,
+			"icon-theme": "Numix-Circle",
+			"tooltip-format": "{title}",
+			"on-click": "activate",
+			"on-click-middle": "close",
+			"rewrite": {
+				"Firefox Web Browser": "Firefox",
+			},
+		},
+		"modules-center": [
+			"hyprland/workspaces",
+		],
+		"modules-left": [
+			"custom/launcher",
+			"group/power",
+			"memory",
+			"cpu",
+			"temperature",
+			"wlr/taskbar",
+		],
+		"modules-right": [
+			"tray",
+			"custom/keyboard",
+			"idle_inhibitor",
+			"custom/notification",
+			"battery",
+			"clock",
+		],
+		"position": "top",
+		"temperature": {
+			"format": " {temperatureC}°C",
+			"tooltip": false
+		},
+		"tray": {
+			"icon-size": 18,
+			"spacing": 8
+		}
+	}
+]

@@ -1,0 +1,20 @@
+configuration {
+	show-icons: true;
+	display-ssh:    "󰣀 ssh:";
+	display-run:    "󱓞 run:";
+	display-drun:   "󰣖 drun:";
+	display-window: "󱂬 window:";
+	display-combi:  "󰕘 combi:";
+	display-filebrowser: "󰉋 filebrowser:";
+	terminal: "kitty";
+	timeout {
+		action: "kb-cancel";
+		delay:  0;
+	}
+	filebrowser {
+		directories-first: true;
+		sorting-method:    "name";
+	}
+}
+
+@theme "./catppuccin-lavrent-mocha.rasi"
